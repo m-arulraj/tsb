@@ -10,12 +10,11 @@ spring:
        prefix: /jsp/
        suffix: .jsp
   datasource:
-     dataSourceClassName: com.mysql.jdbc.jdbc2.optional.MysqlDataSource
-     url: jdbc:mysql://${DB_URL:localhost}:${DB_PORT:3306}/${DB_NAME:tsb}
+     url: postgres://evxybkkmiodzdd:857fa7799badf797bc9ae444b67dab94d2490e4a25d5a2d112019fbc75b8c42e@ec2-54-225-237-84.compute-1.amazonaws.com:5432/d3ftstv7m1o4k2
      databaseName:
      serverName:
-     username: ${DB_USERNAME:root}
-     password: ${DB_PASSWORD:root}
+     username: 
+     password: 
      connectionTimeout: 10000
      cachePrepStmts: true
      prepStmtCacheSize: 250
@@ -23,7 +22,7 @@ spring:
      useServerPrepStmts: true
 
   jpa:
-     database-platform: org.hibernate.dialect.MySQL5Dialect
+     database-platform: org.hibernate.dialect.PostgreSQLDialect
      database: MYSQL
      openInView: false
      show_sql: true
