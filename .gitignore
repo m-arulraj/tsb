@@ -1,5 +1,12 @@
+# Eclipse file
+.settings
+.project
+.metadata
+.classpath
+
 # Compiled class file
 *.class
+target/
 
 # Log file
 *.log
