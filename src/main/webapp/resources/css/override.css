@@ -1,0 +1,131 @@
+/*----------------------------- Overrided Styles For below vendor css-------------*/
+/* -- bootstrap --*/
+.jumbotron {
+	background-color: #337ab7;
+	color: #fff;
+	padding: 100px 25px;
+	border-radius: 0;
+}
+
+.card {
+	border: 1px solid #337ab7;
+	border-radius: .5rem;
+	padding: 5px 5px 5px 5px;
+}
+
+
+.navbar {
+	height: 60px;
+	margin-bottom: 0;
+	background-color: #337ab7;
+	z-index: 9999;
+	border: 0;
+	font-size: 13px !important;
+	line-height: 1.42857143 !important;
+	letter-spacing: 4px;
+	border-radius: 0;
+}
+
+.navbar li a, .navbar .navbar-brand {
+	color: #fff !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+	color: #337ab7 !important;
+	background-color: #fff !important;
+}
+
+.dropdown-menu {
+	border: 1px solid #337ab7;
+	border-radius: .25rem;
+	background-color: #337ab7;
+	font-size: 13px !important;
+	letter-spacing: 2px;
+}
+
+.carousel-control.right, .carousel-control.left {
+	background-image: none;
+	color: #337ab7;
+}
+
+.carousel-indicators ol {
+	border-color: red;
+}
+
+.carousel-indicators li {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 1px;
+	text-indent: -999px;
+	cursor: pointer;
+	background-color: #000;
+	background-color: rgba(0, 0, 0, 0);
+	border: 1px solid #78bd2e;
+	border-radius: 10px;
+}
+
+.carousel-indicators li.active {
+	background-color: #78bd2e;
+}
+
+@media ( min-width : 100%) .container {
+	max-width
+	
+	
+	:
+	
+	 
+	
+	100%;
+}
+
+.btn {
+	color: #fff;
+	border-radius: 20px;
+	padding: 5px 25px 5px 25px;
+}
+
+.btn:hover {
+	font-weight: bold;
+}
+
+.btn-primary {
+	background-color: #337ab7;
+	border-color: #07467b;
+}
+
+.btn-primary:hover {
+	background-color: #fff;
+	color: #337ab7;
+}
+
+.btn-sucess {
+	background-color: #78bd2e;
+	border-color: #5a8c22;
+}
+
+.btn-sucess:hover {
+	color: #78bd2e;
+	background-color: #fff;
+}
+
+.btn-secondary {
+	background-color: #d7dde4;
+	border-color: #667380;
+}
+
+.btn-secondary:hover {
+	color: #a2afbf;
+	background-color: #fff;
+}
+
+.btn-info {
+	background-color: #1bc2da;
+	border-color: #138c9d;
+}
+
+.btn-info:hover {
+	color: #1bc2da;
+	background-color: #fff;
+}

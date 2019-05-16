@@ -35,8 +35,9 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public Stock saveStock(Stock prod) {
-		return repo.save(prod);
+	public Stock saveStock(Stock stock) {
+		stock.setQuantity(stock.getStockQuantity());
+		return repo.save(stock);
 	}
 
 	@Override

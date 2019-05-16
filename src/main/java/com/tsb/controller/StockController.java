@@ -106,5 +106,15 @@ public class StockController {
 	public @ResponseBody List<Stock> getStockAutoComplet(@RequestParam("term") String query) {
 		return service.getAutoCompleteStocks(query);
 	}
+	
+	@RequestMapping(path = "/newlogin", method = RequestMethod.GET)
+	public String newlogin() {
+		return "newlogin";
+	}
+	
+	@RequestMapping(path = "/newhome", method = RequestMethod.GET)
+	public String newhome() {
+		return "newhome";
+	}
 
 }

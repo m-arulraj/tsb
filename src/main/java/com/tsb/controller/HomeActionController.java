@@ -25,7 +25,7 @@ public class HomeActionController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index() {
 		log.debug("index service");
-		return "login";
+		return "welcome";
 	}
 
 	@RequestMapping(value = "/home", method = RequestMethod.GET)

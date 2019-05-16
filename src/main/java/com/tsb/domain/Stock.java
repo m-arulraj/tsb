@@ -36,10 +36,10 @@ public class Stock extends BaseEntity {
 	private Long manufacturerId;
 
 	@Column(name = "stockquantity", nullable = false)
-	private int stockQuantity;
+	private Long stockQuantity;
 
 	@Column(name = "quantity", nullable = false)
-	private int quantity;
+	private Long quantity;
 
 	@Column(name = "mrpperitme", nullable = false)
 	private double mrpPerItem;
@@ -64,6 +64,9 @@ public class Stock extends BaseEntity {
 
 	@Column(name = "deleteflag", nullable = false)
 	private String deleteFlag;
+
+	@Column(name = "threshold", nullable = false)
+	private Long threshold;
 
 	@OneToOne(fetch = FetchType.EAGER, optional = false)
 	@JoinColumn(name = "CATEGORYID", nullable = false, insertable = false, updatable = false)
@@ -101,19 +104,19 @@ public class Stock extends BaseEntity {
 		this.manufacturerId = manufacturerId;
 	}
 
-	public int getStockQuantity() {
+	public Long getStockQuantity() {
 		return stockQuantity;
 	}
 
-	public void setStockQuantity(int stockQuantity) {
+	public void setStockQuantity(Long stockQuantity) {
 		this.stockQuantity = stockQuantity;
 	}
 
-	public int getQuantity() {
+	public Long getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
 
@@ -211,6 +214,14 @@ public class Stock extends BaseEntity {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public Long getThreshold() {
+		return threshold;
+	}
+
+	public void setThreshold(Long threshold) {
+		this.threshold = threshold;
 	}
 
 }

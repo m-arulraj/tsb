@@ -6,14 +6,8 @@
 <jsp:include page="pageheader.jsp" flush="true"></jsp:include>
 </head>
 <body class="loaded">
-	<div class="main-wrapper">
-		<div class="app" id="app">
-			<jsp:include page="header.jsp" flush="true"></jsp:include>
-			<jsp:include page="sidebar.jsp" flush="true"></jsp:include>
-			<jsp:include page="billingform.jsp" flush="true"></jsp:include>
-			<jsp:include page="footer.jsp" flush="true"></jsp:include>
-		</div>
-	</div>
-	<jsp:include page="reference.jsp" flush="true"></jsp:include>
+	<jsp:include page="fragments/headersecured.jsp" flush="true"></jsp:include>
+	<jsp:include page="billingform.jsp" flush="true"></jsp:include>
+	<jsp:include page="fragments/footer.jsp" flush="true"></jsp:include>
 </body>
 </html>

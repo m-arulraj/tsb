@@ -1,6 +1,12 @@
+var i = 1;
 $(document).ready(
 		function() {
-			$("[name=discountprice]:last").hide();
+			var selectedBillId = $("#billId").val();
+			if(selectedBillId>0){
+				i=parseInt($("[name=rowId]:last").val());
+			}else{
+				$("[name=discountprice]:last").hide();
+			}
 			$("[name=stock]").each(function(index) {
 				enableAutoComplete($(this));
 			});
@@ -24,19 +30,20 @@ $(document).ready(
 		});
 
 function addbutton($element){
-	var i = 1;
 	$element.click(
 			function() {
 				b = i - 1;
+				console.log(b);
 				$('#addr' + i).html($('#addr' + b).html()).find(
-						'td:first-child').html(i + 1);
+						'.id').html(i + 1);
+				$('#addr' + i).html($('#addr' + i).html()).find(
+				'.rowId').val(i + 1);
 				$('#addr' + i).html($('#addr' + i).html()).find(
 						'.baseprice_dis').text('');
 				$('#addr' + i).html($('#addr' + i).html()).find(
 						'.taxprice_dis').text('');
 				$('#addr' + i).html($('#addr' + i).html()).find(
 						'.total_dis').text('');
-
 				$('#addr' + i).html($('#addr' + i).html()).find(
 						'.baseprice').val('0.0');
 				$('#addr' + i).html($('#addr' + i).html()).find(
@@ -48,6 +55,10 @@ function addbutton($element){
 				$('#tab_logic').append(
 						'<tr id="addr' + (i + 1) + '"></tr>');
 				i++;
+				$("[name=stock]:last").val('');
+				$("[name=qty]:last").val('0');
+				$("[name=price]:last").val('0.00');
+				$("[name=tax]:last").val('0.00');
 				enableAutoComplete($("[name=stock]:last"));
 				$('#addr' + i).html($('#addr' + i).html()).find(
 						'.stock').focus();
@@ -57,8 +68,9 @@ function addbutton($element){
 
 function deletebutton($element){
 	$element.click(function() {
-		if (i > 1) {
-			$("#addr" + (i - 1)).html('');
+		 var selectedRow = $(".rowId:checked").val();
+		if (selectedRow >= 1) {
+			$("#addr" + (selectedRow - 1)).html('');
 			i--;
 		}
 		calc();

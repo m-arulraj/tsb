@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 
 import com.tsb.domain.Bill;
 import com.tsb.domain.BillItem;
+import com.tsb.domain.Stock;
 import com.tsb.repository.BillItemRepository;
 import com.tsb.repository.BillRepository;
 
@@ -23,6 +24,9 @@ public class BillServiceImpl implements BillService {
 
 	@Autowired
 	BillItemRepository itemRepo;
+	
+	@Autowired
+	StockService stockService;
 
 	@Override
 	public Long saveBill(HttpServletRequest request, String userName) {
@@ -42,8 +46,15 @@ public class BillServiceImpl implements BillService {
 		String total_amount = request.getParameter("total_amount");
 		int totalItems = stockIds.length;
 		Bill bill = new Bill();
+		
 		if (!StringUtils.isEmpty(billId)) {
-			bill.setBillId(Long.valueOf(billId));
+			bill =repo.findById(Long.valueOf(billId)).get();
+			//repo.deleteItemsByBillId(billId);
+		}else {
+			bill.setCreatedBy(userName);
+			bill.setCreatedOn(new Date());
+			bill.setDeleteFlag("N");
+		
 		}
 
 		bill.setNoOfItems(Long.valueOf(totalItems));
@@ -51,14 +62,13 @@ public class BillServiceImpl implements BillService {
 		bill.setTotalTaxAmount(Double.valueOf(tax_amount));
 		bill.setTotalDiscountAmount(Double.valueOf(discount_amount));
 		bill.setTotalBaseAmout(Double.valueOf(sub_total));
-		bill.setCreatedBy(userName);
 		bill.setModifiedBy(userName);
-		bill.setCreatedOn(new Date());
 		bill.setModifiedOn(new Date());
-		bill.setDeleteFlag("N");
-
+		
 		repo.save(bill);
-
+		if (!StringUtils.isEmpty(billId)) {
+			repo.deleteItemsByBillId(billId);
+		}
 		List<BillItem> items = new ArrayList<BillItem>(totalItems);
 
 		BillItem item = null;
@@ -68,6 +78,15 @@ public class BillServiceImpl implements BillService {
 			item.setStockId(Long.valueOf(stockIds[i]));
 			item.setQuantity(Long.valueOf(qtys[i]));
 
+			Stock stock = stockService.getActiveStock(item.getStockId());
+			if(stock.getQuantity()>=item.getQuantity()) {
+				stock.setQuantity(stock.getQuantity() - item.getQuantity());
+				stockService.saveStock(stock);
+			}else {
+				//throw exception
+			}
+			
+			
 			item.setMrp(Double.valueOf(price[i]));
 			item.setTax(Double.valueOf(tax[i]));
 			item.setBaseAmout(Double.valueOf(baseprice[i]));

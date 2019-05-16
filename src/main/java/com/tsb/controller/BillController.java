@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -48,7 +49,7 @@ public class BillController {
 
 	@RequestMapping(path = "/bill/{billId}", method = RequestMethod.GET, params = "edit")
 	public ModelAndView getBillToEdit(@PathVariable(name = "billId") Long billId) {
-		ModelAndView mav = new ModelAndView("billedit");
+		ModelAndView mav = new ModelAndView("billing");
 		mav.addObject("bill", service.getBill(billId));
 		return mav;
 	}
@@ -64,8 +65,12 @@ public class BillController {
 	@RequestMapping(path = "/billing", method = RequestMethod.POST, params = "Save")
 	public ModelAndView saveBill(HttpServletRequest request, Principal principal) {
 		String loggedIn = principal.getName();
-
-		ModelAndView mav = new ModelAndView("billing");
+		String billId = request.getParameter("billId");
+		String view = "billing";
+		if (!StringUtils.isEmpty(billId)) {
+			view = "redirect:/bills";
+		}
+		ModelAndView mav = new ModelAndView(view);
 		mav.addObject("billId", service.saveBill(request, loggedIn));
 		return mav;
 	}
@@ -74,7 +79,12 @@ public class BillController {
 	public ModelAndView saveAndPrintBill(HttpServletRequest request, Principal principal) {
 		String loggedIn = principal.getName();
 
-		ModelAndView mav = new ModelAndView("billing");
+		String billId = request.getParameter("billId");
+		String view = "billing";
+		if (!StringUtils.isEmpty(billId)) {
+			view = "bills";
+		}
+		ModelAndView mav = new ModelAndView(view);
 		mav.addObject("billId", service.saveBill(request, loggedIn));
 		return mav;
 	}

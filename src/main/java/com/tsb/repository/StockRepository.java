@@ -13,7 +13,7 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
 
 	public String ALL_STOCK = "SELECT " + "STOCKID," + "CATEGORYID," + "CREATEDBY," + "CREATEDON," + "DELETEFLAG,"
 			+ "DISCOUNTABLE," + "GST," + "MANUFACTURERID," + "MODIFIEDBY," + "MODIFIEDON," + "MRPPERITME," + "QUANTITY,"
-			+ "STOCKQUANTITY," + "PRODUCTID " + " FROM TSB_STOCK  " + " WHERE 1=1 ";
+			+ "STOCKQUANTITY," + "PRODUCTID, THRESHOLD " + " FROM TSB_STOCK  " + " WHERE 1=1 ";
 
 	@Query(value = ALL_STOCK + " AND DELETEFLAG='N'", nativeQuery = true)
 	public List<Stock> getAllActiveStocks();

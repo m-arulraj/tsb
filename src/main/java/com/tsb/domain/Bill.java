@@ -3,6 +3,7 @@ package com.tsb.domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,7 +52,7 @@ public class Bill {
 	@Column(name = "deleteflag", nullable = false)
 	private String deleteFlag;
 
-	@OneToMany(mappedBy = "bill", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "bill", fetch = FetchType.EAGER,cascade=CascadeType.DETACH)
 	private List<BillItem> items;
 
 	public Long getBillId() {

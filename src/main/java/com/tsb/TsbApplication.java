@@ -14,7 +14,6 @@ public class TsbApplication extends SpringBootServletInitializer {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("TSB is running...");
 		SpringApplication.run(TsbApplication.class, args);
 	}
 
