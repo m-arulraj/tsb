@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
-<jsp:include page="pageheader.jsp" flush="true"></jsp:include>
+<jsp:include page="fragments/pageheader.jsp" flush="true"></jsp:include>
 </head>
 <body class="loaded">
 	<jsp:include page="fragments/headersecured.jsp" flush="true"></jsp:include>
