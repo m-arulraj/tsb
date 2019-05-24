@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "tsb_bill_items")
 public class BillItem {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "itemid", nullable = false)
 	private Long itemId;
 
