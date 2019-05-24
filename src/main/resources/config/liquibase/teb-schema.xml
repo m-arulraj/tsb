@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<property name="now" value="now()" dbms="mysql,h2" />
+	<property name="now" value="current_timestamp"
+		dbms="postgresql" />
+
+	<changeSet id="teb1" author="Arulraj M">
+		<dropTable cascadeConstraints="true" tableName="tsb_bill_items" />
+		<dropTable cascadeConstraints="true" tableName="tsb_bill" />
+		<dropTable cascadeConstraints="true" tableName="tsb_stock" />
+		<dropTable cascadeConstraints="true" tableName="tsb_product" />
+		<dropTable cascadeConstraints="true" tableName="ref_manufacturer" />
+		<dropTable cascadeConstraints="true" tableName="ref_category" />
+		
+		<createTable tableName="ref_category">
+			<column name="categoryid" type="bigint" startWith="1"
+				autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="categoryname" type="varchar(200)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="categorydesc" type="varchar(2000)" />
+			<column name="createdon" type="date" />
+			<column name="createdby" type="varchar(50)" />
+			<column name="modifiedon" type="date" />
+			<column name="modifiedby" type="varchar(50)" />
+			<column name="deleteflag" type="varchar(1)" defaultValue="N" />
+		</createTable>
+
+		<createTable tableName="ref_manufacturer">
+			<column name="manufacturerid" type="bigint" startWith="1"
+				autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="manufacturername" type="varchar(200)">
+				<constraints nullable="false" unique="true" />
+			</column>
+			<column name="manufacturerdesc" type="varchar(2000)" />
+			<column name="createdon" type="date" />
+			<column name="createdby" type="varchar(50)" />
+			<column name="modifiedon" type="date" />
+			<column name="modifiedby" type="varchar(50)" />
+			<column name="deleteflag" type="varchar(1)" defaultValue="N" />
+		</createTable>
+
+		<createTable tableName="tsb_product">
+			<column name="productid" type="bigint" startWith="1"
+				autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="categoryid" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="productname" type="varchar(200)">
+				<constraints nullable="false" />
+			</column>
+			<column name="productdesc" type="varchar(2000)" />
+			<column name="createdon" type="date" />
+			<column name="createdby" type="varchar(50)" />
+			<column name="modifiedon" type="date" />
+			<column name="modifiedby" type="varchar(50)" />
+			<column name="deleteflag" type="varchar(1)" defaultValue="N" />
+		</createTable>
+
+		<createTable tableName="tsb_stock">
+			<column name="stockid" type="bigint" startWith="1"
+				autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="categoryid" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="productid" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="manufacturerid" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="discountable" type="bit(1)" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="gst" type="double" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="mrpperitme" type="double" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="quantity" type="NUMBER" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="stockquantity" type="NUMBER" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="threshold" type="NUMBER" defaultValue="0">
+				<constraints nullable="false" />
+			</column>
+			<column name="createdon" type="date" />
+			<column name="createdby" type="varchar(50)" />
+			<column name="modifiedon" type="date" />
+			<column name="modifiedby" type="varchar(50)" />
+			<column name="deleteflag" type="varchar(1)" defaultValue="N" />
+		</createTable>
+
+		<createTable tableName="tsb_bill">
+			<column name="billid" type="bigint" startWith="1"
+				autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="items" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="amount" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="baseamount" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="taxamount" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="discountamount" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="createdon" type="date" />
+			<column name="createdby" type="varchar(50)" />
+			<column name="modifiedon" type="date" />
+			<column name="modifiedby" type="varchar(50)" />
+			<column name="deleteflag" type="varchar(1)" defaultValue="N" />
+		</createTable>
+
+		<createTable tableName="tsb_bill_items">
+			<column name="itemid" type="bigint" startWith="1"
+				autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="billid" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="stockid" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="quantity" type="bigint">
+				<constraints nullable="false" />
+			</column>
+			<column name="mrp" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="tax" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="baseamount" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="taxamount" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="discount" type="double">
+				<constraints nullable="false" />
+			</column>
+			<column name="amount" type="double">
+				<constraints nullable="false" />
+			</column>
+
+		</createTable>
+		<addUniqueConstraint
+			columnNames="categoryid, productname" constraintName="product_name"
+			tableName="tsb_product" />
+
+	</changeSet>
+
+</databaseChangeLog>
+	
