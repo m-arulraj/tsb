@@ -9,13 +9,22 @@
 		dbms="postgresql" />
 
 	<changeSet id="teb1" author="Arulraj M">
+		<preConditions onFail="MARK_RAN">
+			<tableExists schemaName="tsb" tableName="tsb_bill_items" />
+			<tableExists schemaName="tsb" tableName="tsb_bill" />
+			<tableExists schemaName="tsb" tableName="tsb_stock" />
+			<tableExists schemaName="tsb" tableName="tsb_product" />
+			<tableExists schemaName="tsb" tableName="ref_manufacturer" />
+			<tableExists schemaName="tsb" tableName="ref_category" />
+		</preConditions>
+
 		<dropTable cascadeConstraints="true" tableName="tsb_bill_items" />
 		<dropTable cascadeConstraints="true" tableName="tsb_bill" />
 		<dropTable cascadeConstraints="true" tableName="tsb_stock" />
 		<dropTable cascadeConstraints="true" tableName="tsb_product" />
 		<dropTable cascadeConstraints="true" tableName="ref_manufacturer" />
 		<dropTable cascadeConstraints="true" tableName="ref_category" />
-		
+
 		<createTable tableName="ref_category">
 			<column name="categoryid" type="bigint" startWith="1"
 				autoIncrement="true">
