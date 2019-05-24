@@ -11,9 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "tsb_product")
+@Table(name = "tsb_product",uniqueConstraints= {@UniqueConstraint(columnNames = { "categoryid", "productname" })})
 public class Product extends BaseEntity {
 
 	/**
@@ -26,10 +27,10 @@ public class Product extends BaseEntity {
 	@Column(name = "productid")
 	private Long productId;
 
-	@Column(name = "categoryid")
+	@Column(name = "categoryid",unique=false)
 	private Long categoryId;
 
-	@Column(name = "productname")
+	@Column(name = "productname",unique=false)
 	private String productName;
 
 	@Column(name = "productdesc")
