@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "tsb_product",uniqueConstraints= {@UniqueConstraint(columnNames = { "categoryid", "productname" })})
+@Table(name = "tsb_product", uniqueConstraints = { @UniqueConstraint(columnNames = { "categoryid", "productname" }) })
 public class Product extends BaseEntity {
 
 	/**
@@ -27,10 +27,10 @@ public class Product extends BaseEntity {
 	@Column(name = "productid")
 	private Long productId;
 
-	@Column(name = "categoryid",unique=false)
+	@Column(name = "categoryid", unique = false)
 	private Long categoryId;
 
-	@Column(name = "productname",unique=false)
+	@Column(name = "productname", unique = false)
 	private String productName;
 
 	@Column(name = "productdesc")
@@ -52,7 +52,7 @@ public class Product extends BaseEntity {
 	private String deleteFlag;
 
 	@OneToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "CATEGORYID", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "CATEGORYID", nullable = false, insertable = false, updatable = false, unique = false)
 	private Category category;
 
 	public Long getProductId() {
